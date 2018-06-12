@@ -1,0 +1,9 @@
+%div
+  %hr
+  %div{:class => "comments"}
+    = render commentable.comments
+  %div
+  = form_for [commentable, commentable.comments.build], remote: true do |f|
+    %div{:class => "form-group"}
+      = f.cktext_area :body, class: 'ckeditor', id: 'ckeditor'
+      = f.submit class: 'btn btn-default'

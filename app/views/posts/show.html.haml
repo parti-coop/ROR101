@@ -1,0 +1,22 @@
+%p#notice= notice
+
+%p
+  %b Category:
+  = @post.category.name
+%p
+  %b Title:
+  = content_with_emoji(@post.title)
+%p
+  %b Body:
+  = raw content_with_emoji(@post.body)
+
+%p
+  = image_tag @post.featured_url(:thumb) if @post.featured?
+%p
+  %b
+    Comments
+    = render "comments", commentable: @post
+
+= link_to 'Edit', edit_post_path(@post)
+\|
+= link_to 'Back', posts_path

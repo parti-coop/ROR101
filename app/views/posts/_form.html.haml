@@ -1,0 +1,23 @@
+= form_for @post do |f|
+  - if @post.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+      %ul
+        - @post.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field.emoji-picker-container
+    = f.label :body
+    = f.cktext_area :body, id: 'ckeditor', data: { emojiable: true }
+  .field
+    = f.label :category
+    = f.collection_select :category_id, Category.all, :id, :name, include_blank: true
+  .field
+    = f.label :featured, '이미지'
+    = f.file_field :featured
+  .actions
+    = f.submit 'Save'
+

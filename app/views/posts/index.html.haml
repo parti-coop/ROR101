@@ -1,0 +1,24 @@
+%h1 Listing posts
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Body
+      %th User
+      %th
+      %th
+
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= link_to content_with_emoji(post.title), post
+        %td= content_with_emoji(raw post.body)
+        %td= post.user.email if post.user
+        %td= link_to 'Edit', edit_post_path(post) if can? :edit, post
+        %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if can? :edit, post
+
+%br
+
+= link_to 'New Post', new_post_path
+= link_to 'Home', root_path
